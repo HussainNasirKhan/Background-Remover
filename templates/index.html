@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Remover</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Background Remover</h1>
+        {% if not output_image %}
+            <form id="upload-form" action="{{ url_for('upload_image') }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit">Upload</button>
+            </form>
+        {% endif %}
+        {% if output_image %}
+            <div class="image-container">
+                <div class="image-wrapper">
+                    <h2>Original Image</h2>
+                    <img src="{{ original_image }}" alt="Original Image" class="image-original">
+                </div>
+                <div class="image-wrapper">
+                    <h2>Processed Image</h2>
+                    <img src="{{ output_image }}" alt="Processed Image" class="image-processed">
+                </div>
+            </div>
+            <br>
+            <a href="{{ url_for('download_image') }}"><button>Download Image</button></a>
+            <br><br>
+            <a href="{{ url_for('index') }}"><button>Upload Another Image</button></a>
+        {% endif %}
+    </div>
+</body>
+</html>
